@@ -12,7 +12,9 @@ class AbilityScoreCalculator
     public void CalculateAbilityScore()
     {
         double divided = rollresult / divideby;
-        int added = addamount += divided; // will result in error, need to cast
+
+        // the cast below also rounds down the double
+        int added = addamount += (int)divided;
         
         // curly braces optional below
         if (added < minimum)
@@ -24,8 +26,37 @@ class AbilityScoreCalculator
 
 internal class Program
 {
+    /// <summary>
+    /// Writes a prompt and reads an int value from the console
+    /// </summary>
+    /// <param name="lastUsedValue">default value</param>
+    /// <param name="prompt">prints to console</param>
+    /// <returns>int value read, or default if unable to parse</returns>
+    static int ReadInt(int lastUsedValue, string prompt)
+    {
+
+    }
+    /// <summary>
+    /// Parses like ReadInt but for doubles
+    /// </summary>
+    static double ReadDouble(double lastUsedValue, string prompt)
+    {
+
+    }
     private static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        AbilityScoreCalculator calculator = new AbilityScoreCalculator();
+        while (true)
+        {
+            calculator.rollresult = ReadInt(calculator.rollresult, "Starting 4d6 roll");
+            calculator.divideby = ReadDouble(calculator.divideby, "Divide by");
+            calculator.addamount = ReadInt(calculator.addamount, "Add amount");
+            calculator.minimum = ReadInt(calculator.minimum, "Minimum");
+            calculator.CalculateAbilityScore();
+            Console.WriteLine("Calculated ability score: " + calculator.score);
+            Console.WriteLine("Press Q to quit, any other key to continue");
+            char keyChar = Console.ReadKey(true).KeyChar;
+            if ((keyChar == 'Q') || (keyChar == 'q')) return;
+        }
     }
 }
