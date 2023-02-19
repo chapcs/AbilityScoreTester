@@ -34,17 +34,36 @@ internal class Program
     /// <returns>int value read, or default if unable to parse</returns>
     static int ReadInt(int lastUsedValue, string prompt)
     {
-        // write prompt followed by [default value]:
-        // Read the line from the input and use int.TryParse to attempt to parse it
-        // If it can be parsed, write "using value" + value to console
-        // Otherwise write "using default value" + lastUsedValue to the console
+        Console.Write(prompt + " [" + lastUsedValue + "]: ");
+        string line = Console.ReadLine();
+        if (int.TryParse(line, out int value))
+        {
+            Console.WriteLine("   using value " + value);
+            return value;
+        }
+        else
+        {
+            Console.WriteLine("   using default value " + lastUsedValue);
+            return lastUsedValue;
+        }
     }
     /// <summary>
     /// Parses like ReadInt but for doubles
     /// </summary>
     static double ReadDouble(double lastUsedValue, string prompt)
     {
-        
+        Console.Write(prompt + " [" + lastUsedValue + "]: ");
+        string line = Console.ReadLine();
+        if (double.TryParse(line, out double value))
+        {
+            Console.WriteLine("   using value " + value);
+            return value;
+        }
+        else
+        {
+            Console.WriteLine("   using default value " + lastUsedValue);
+            return lastUsedValue;
+        }
     }
     private static void Main(string[] args)
     {
