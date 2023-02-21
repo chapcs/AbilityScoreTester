@@ -14,7 +14,7 @@ class AbilityScoreCalculator
         double divided = rollresult / divideby;
 
         // the cast below also rounds down the double
-        int added = addamount += (int)divided;
+        int added = addamount + (int)divided;
         
         // curly braces optional below
         if (added < minimum)
@@ -79,6 +79,7 @@ internal class Program
             Console.WriteLine("Press Q to quit, any other key to continue");
             char keyChar = Console.ReadKey(true).KeyChar;
             if ((keyChar == 'Q') || (keyChar == 'q')) return;
+            else Console.Write("\n");
         }
     }
 }
